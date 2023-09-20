@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Show Tasks{% endblock title %}
+{% block content %}
+    {% if data %}
+        <h1>Showing Tasks ToDo:</h1>
+        <table class="table table-hover table-bordered align-middle">
+            <thead>
+                <tr class="align-middle">
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                    <tr>
+                        <td>{{item.taskTitle}}</td>
+                        <td>{{item.taskDescription}}</td>
+                        <td>Incompleted</td>
+                        <td>
+                            <a class='btn btn-danger' href="{% url 'del' item.id %}">Delete</a>
+                            <a class='btn btn-danger' href="{% url 'edi' item.id %}">Edit</a>
+                            <a class='btn btn-danger' href="{% url 'com' item.id %}">Complete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h1>No Tasks ToDo.</h1>
+    {% endif %}
+<a href='{% url 'add' %}' class='btn btn-primary'>Add A Task</a>
+{% endblock content %}
